@@ -1,4 +1,4 @@
-# Todo Application
+# Todo Application Backend using Express and PostgreSQL
 
 A todo application that let’s a user signup, put todos and fetch todos. 
 
