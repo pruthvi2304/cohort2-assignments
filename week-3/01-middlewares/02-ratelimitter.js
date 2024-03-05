@@ -16,6 +16,29 @@ setInterval(() => {
     numberOfRequestsForUser = {};
 }, 1000)
 
+function rateLimitMiddleware(req, res, next) {
+  const UserId = req.headers['user-id'];
+  if(!UserId) {
+    return res.status(403).json({
+      error: "UserId is required"
+    });
+  }
+
+  if(!numberOfRequestsForUser[UserId]){
+    numberOfRequestsForUser[UserId] = 0;
+  }
+
+  numberOfRequestsForUser[UserId]++; 
+
+  if(numberOfRequestsForUser[UserId] > 5){
+    return res.status(404).json({ error: 'Rate limit exceeded' });
+  }
+
+  next();
+}
+
+app.use(rateLimitMiddleware); 
+
 app.get('/user', function(req, res) {
   res.status(200).json({ name: 'john' });
 });
