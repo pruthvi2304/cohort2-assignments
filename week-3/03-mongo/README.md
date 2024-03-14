@@ -20,7 +20,7 @@ You need to use mongodb to store all the data persistently.
 ### Admin Routes:
 - POST /admin/signup
   Description: Creates a new admin account.
-  Input Body: { username: 'admin', password: 'pass' }
+  Input Body: { username: 'admin', password: 'pass' } 
   Output: { message: 'Admin created successfully' }
 - POST /admin/courses
   Description: Creates a new course.
